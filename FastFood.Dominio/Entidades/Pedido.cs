@@ -1,10 +1,11 @@
 ﻿using FastFood.Dominio.ObjetoDeValor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FastFood.Dominio.Entidades
 {
-    public class Pedido
+    public class Pedido : Entidade
     {
         public int Id { get; set; }
         public DateTime DataPedido { get; set; }
@@ -19,5 +20,20 @@ namespace FastFood.Dominio.Entidades
         public FormaPagamento FormaPagamento { get; set; }
         public ICollection<ItemPedido> ItensPedido { get; set; }
 
+        public override void Validate()
+        {
+            LimparMensagemDeValidacao();
+
+            if (!ItensPedido.Any())
+                AdicionarMensagem("Erro - Pedido não pode ficar sem itens!");
+
+            if (string.IsNullOrEmpty(Cep))
+                AdicionarMensagem("Erro - Cep deve estar preenchido.");
+
+            if (FormaPagamentoId == 0)
+            {
+                AdicionarMensagem("Erro - Não foi informado a forma de pagamento");
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FastFood.Dominio.Entidades
 {
-    public class Usuario
+    public class Usuario : Entidade
     {
         public int Id { get; set; }
         public string Email { get; set; }
@@ -13,5 +13,17 @@ namespace FastFood.Dominio.Entidades
         public string sobreNome { get; set; }
 
         public ICollection<Pedido> Pedidos { get; set; }
+
+        public override void Validate()
+        {
+            if (string.IsNullOrEmpty(Email))
+            {
+                AdicionarMensagem("Erro - Email não foi informado.");
+            }
+            if (string.IsNullOrEmpty(Senha))
+            {
+                AdicionarMensagem("Erro - Senha não infomada.");
+            }
+        }
     }
 }
