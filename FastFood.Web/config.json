@@ -1,0 +1,7 @@
+{
+  "ConnectionStrings": {
+
+    "FastFoodDB": "server=localhost;uid=root;pwd=adminadmin;database=test"
+  }
+}
+
